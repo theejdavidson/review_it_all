@@ -1,8 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
-    addLogInListener()
-});
-  
-var userID = ""
+let userID = ""
   
 function addLogInListener(){  //add listener to log in button
     let button = document.getElementById('login-button')
@@ -57,3 +53,9 @@ function logoutUser(){ //clear current user global variables, load login
     location.reload()
     addLogInListener()
 }
+
+function main() {
+  addLogInListener()
+}
+
+main();
