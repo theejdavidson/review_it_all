@@ -11,10 +11,10 @@ Subject.destroy_all
 Review.destroy_all
 Vote.destroy_all
 
-User.reset_pk_sequence
-Subject.reset_pk_sequence
-Review.reset_pk_sequence
-Vote.reset_pk_sequence
+# User.reset_pk_sequence
+# Subject.reset_pk_sequence
+# Review.reset_pk_sequence
+# Vote.reset_pk_sequence
 
 
 
