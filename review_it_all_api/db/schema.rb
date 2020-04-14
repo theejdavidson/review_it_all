@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2020_04_13_184137) do
     t.text "content"
     t.integer "subject_id", null: false
     t.integer "user_id", null: false
+    t.integer "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["subject_id"], name: "index_reviews_on_subject_id"
