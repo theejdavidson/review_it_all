@@ -94,3 +94,38 @@ input:checked + .slider:before {
 .show-name {
   margin-right: 15px;
 }
+
+.icon {
+  display: inline-block;
+  position: relative;
+  top: 7.5px;
+  width: 30px; 
+  height: 30px; 
+}
+
+.app-name {
+  display: inline;
+  margin-left: 10px;
+}
+
+.form {
+  text-align: center!important;
+  margin-bottom: 1.5rem!important;
+}
+
+.login-btn {
+  margin-left: 3px;
+  color: #fff;
+  background-color: #464646;
+  border-color: #000000;
+}
+
+.btn {
+  color: #fff;
+  background-color: #464646;
+  border-color: #000000;
+}
+
+.text-center {
+  text-align: center!important;
+}
