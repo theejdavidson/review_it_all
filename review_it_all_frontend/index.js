@@ -72,8 +72,7 @@ const createNewUser = username => {
 const renderHomePage = username => {
   logInWrapper.hidden = true;
   displayName.hidden = false;
-  console.log(username)
-  console.log(displayName)
+
   displayName.innerHTML = `${username} <button id='log-out'>log out</button>`
   addLogOutEventListener();
   //toDo: create reviews show div
@@ -103,8 +102,23 @@ const fetchReviews = () => {
     })
 }
 
-const displayReview = (content, userId, subjId) => {
-  reviewsWrapper.innerHTML += '<h4></h4>'
+const displayReview = async(content, userId, subjId) => {
+  const userName = await fetchUsername(userId)
+  const subject = await fetchSubject(subjId)
+  reviewsWrapper.innerHTML += `<h4>${subject.category}</h4><h3>${userName}</h3>
+  <p>${content}</p>`
+}
+
+const fetchUsername = (userId) => {
+  return fetch(`http://localhost:3000/users/${userId}`)
+    .then(resp => resp.json())
+    .then(userObj => userObj.username)
+}
+
+const fetchSubject = (subjId) => {
+  return fetch(`http://localhost:3000/subjects/${subjId}`)
+    .then(resp => resp.json())
+    .then(subjObj => subjObj)
 }
 
 function main() {
