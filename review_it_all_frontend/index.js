@@ -1,61 +1,96 @@
 let userID = ""
+const logInWrapper = document.getElementById('log-in-wrapper')
+const logIn = document.getElementById('form-signin')
+const logOut = document.getElementById('log-out')
+const newUser = document.getElementById('new-user')
+const newUserToggle = document.getElementById('new-user-toggle')
+
+const renderLogin = () => {
+  newUser.hidden = true
+  logOut.hidden = true
+  logInWrapper.hidden = false
+}
   
-function addLogInListener(){  //add listener to log in button
-    let button = document.getElementById('login-button')
-    button.addEventListener('click', (event) => {
+const addLogInListener = () => {
+    logIn.addEventListener('submit', event => {
       event.preventDefault()
-      let doc = document.getElementById('form-signin')
-      let username = document.getElementById('username').value
-
-      while(doc.firstChild){ //clear log in form
-        doc.removeChild(doc.firstChild)
-      }
-
+      const username = document.getElementById('username').value
       logInUser(username)
+      logIn.reset()
     })
 }
 
-function logInUser(username){ //creates user account if new
-    let config = {
-      method: 'POST',
-      headers: {'Accept': 'application/json',
-            'Content-Type': 'application/json'},
-      body: JSON.stringify({username: username})
-    }
-    let url = 'http://localhost:3000/review_it_all_api/users'
-    fetch(url, config)
+const logInUser = username => {
+    fetch('http://localhost:3000/users')
       .then(resp => resp.json())
-      .then(data => {
-        userID = data.id
-        let username = data.username
-        renderHomePage(username)
+      .then(users => {
+        const currentUser = users.find(un => un.username == username)
+          if(currentUser) {
+            userID = currentUser.id
+            renderHomePage(username)
+          } else {
+            //show error message
+            console.log('username does not exist')
+          }
         })
 }
 
-function renderHomePage(username){ //renders homepage
-    let welcome = document.getElementById('welcome-bar')
-    welcome.textContent = `${username}`
+const addNewUserEventListener = () => {
 
-    let div = document.getElementById('log-out')
-    let button = document.createElement('button')
-    button.classList.add('btn-primary')
-    button.textContent = 'log out'
-
-    button.addEventListener('click', (event) => {
-      event.preventDefault()
-      logoutUser()
-    })
-    div.appendChild(button)
+  newUserToggle.addEventListener('click', event => {
+    event.preventDefault()
+    logIn.hidden = true;
+    newUser.hidden = false;
+    newUserToggle.hidden = true;
+  })
+  newUser.addEventListener('submit', event => {
+    event.preventDefault()
+    const username = document.getElementById('new-username').value
+    createNewUser(username)
+    logInUser(username)
+  })
 }
 
-function logoutUser(){ //clear current user global variables, load login
+const createNewUser = username => {
+  reqBody = {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      username: username
+    })
+  }
+  fetch(`http://localhost:3000/users`, reqBody)
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+}
+
+const renderHomePage = username => {
+  logInWrapper.hidden = true;
+  logOut.hidden = false;
+  addLogOutEventListener();
+  //toDo: display username on welcome bar
+  //toDo: create reviews show div
+}
+
+const addLogOutEventListener = () => {
+  logOut.addEventListener('click', event => {
+    event.preventDefault()
+    logOutUser()
+  })
+}
+
+const logOutUser = () => { //clear current user global variables, load login
     userID = ""
-    location.reload()
-    addLogInListener()
+    renderLogin()
 }
 
 function main() {
+  renderLogin()
   addLogInListener()
+  addNewUserEventListener()
 }
 
 main();
