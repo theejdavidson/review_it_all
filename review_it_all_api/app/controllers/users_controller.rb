@@ -1,35 +1,25 @@
 class UsersController < ApplicationController
-<<<<<<< HEAD
     def index
         users = User.all
         render json: users, include: [:reviews]
     end
-end
-=======
 
-    @@all = []
-
-
-    def create #create and save user to db
-      if User.find_by(username: params[:username]) #if username exists
-        @user = User.find_by(username: params[:username]) #if username exists
-        render json: @user #return the instance of the user
-      else
-        @user = User.create(user_params) #create user
-        @@all << @user
-        render json: @user
-      end
+    def show
+        user = User.find(params[:username])
     end
-  
-    def index
+
+    def create
+        p params
+        user = User.new(user_params)
+        if user.save
+            puts user
+            render json: user
+        end
     end
-  
 
     private
-  
+    
     def user_params
-      params.require(:user).permit(:username)
+        params.require(:user).permit(:username)
     end
-
 end
->>>>>>> yusufcelep
