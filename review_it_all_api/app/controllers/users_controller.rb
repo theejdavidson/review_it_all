@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
     def index
         users = User.all
-        render json: users, include: [:reviews]
+        render json: users#, include: [:reviews]
     end
 
     def show

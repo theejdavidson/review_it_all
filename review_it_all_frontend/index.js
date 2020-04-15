@@ -73,6 +73,7 @@ const renderHomePage = username => {
   addLogOutEventListener();
   //toDo: display username on welcome bar
   //toDo: create reviews show div
+  fetchReviews()
 }
 
 const addLogOutEventListener = () => {
@@ -85,6 +86,12 @@ const addLogOutEventListener = () => {
 const logOutUser = () => { //clear current user global variables, load login
     userID = ""
     renderLogin()
+}
+
+const fetchReviews = () => {
+  fetch('http://localhost:3000/reviews')
+    .then(resp => resp.json())
+    .then(reviewObjs => console.log(reviewObjs))
 }
 
 function main() {
