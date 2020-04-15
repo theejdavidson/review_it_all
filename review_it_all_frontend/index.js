@@ -5,11 +5,16 @@ const displayName = document.getElementById('displayname')
 const newUser = document.getElementById('new-user')
 const newUserToggle = document.getElementById('new-user-toggle')
 const reviewsWrapper = document.getElementById('reviews-wrapper')
+const newReviewWrapper = document.getElementById('new-review-wrapper')
+const writeReview = document.getElementById('write-review')
 
 const renderLogin = () => {
   newUser.hidden = true
+  writeReview.hidden = true
   logInWrapper.hidden = false
   displayName.hidden = true
+  newReviewWrapper.hidden = true
+  reviewsWrapper.hidden = true
 }
   
 const addLogInListener = () => {
@@ -69,11 +74,12 @@ const createNewUser = username => {
 }
 
 const renderHomePage = username => {
-  logInWrapper.hidden = true;
-  displayName.hidden = false;
+  logInWrapper.hidden = true
+  displayName.hidden = false
+  reviewsWrapper.hidden = false
+  writeReview.hidden = false
   displayName.innerHTML = `${username} <button id='log-out'>log out</button>`
   addLogOutEventListener();
-  //toDo: create reviews show div
   fetchReviews()
 }
 
@@ -107,13 +113,13 @@ const displayReview = async(content, userId, subjId) => {
   <p>${content}</p><h5>category: ${subject.category}</h5></div>`
 }
 
-const fetchUsername = (userId) => {
+const fetchUsername = async(userId) => {
   return fetch(`http://localhost:3000/users/${userId}`)
     .then(resp => resp.json())
     .then(userObj => userObj.username)
 }
 
-const fetchSubject = (subjId) => {
+const fetchSubject = async(subjId) => {
   return fetch(`http://localhost:3000/subjects/${subjId}`)
     .then(resp => resp.json())
     .then(subjObj => subjObj)
