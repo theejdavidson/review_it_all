@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
-    <meta charset="UTF-8">
-    <link rel="shortcut icon" href="https://cdn3.iconfinder.com/data/icons/media-1-3/32/Internet-Globe-Communication-512.png"/>
-    <title>Review It All!</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="styles.css">
+
+  <link rel="shortcut icon" href="https://cdn3.iconfinder.com/data/icons/media-1-3/32/Internet-Globe-Communication-512.png"/>
+  <title>Review It All!</title>
 </head>
 
 <body>
-    <script src="index.js" defer></script>
-    <div>
-        <span>
-            <h1 id='welcome-bar'>
-                <img src="https://cdn3.iconfinder.com/data/icons/media-1-3/32/Internet-Globe-Communication-512.png" alt="internet icon" width = '45' height = '45'>
-                Review It All!
-                <h3 id='displayname' style='float: right;'></h3>
-                <button id='log-out' style='float: right;'>log out</button>
-            </h1>
-        </span>
-    </div>
-    <div id="log-in-wrapper">
-        <div id="log-in">
-        <form id="form-signin">
-            <input type=text id='username' placeholder='username'>
-            <button type='submit' id='login-button'>log in</button>
-        </form>
-        <button id='new-user-toggle'>new user?</button>
-        </div>
+  <script src="index.js" defer></script>
 
-        <div id="new-user">
-            <form id="form-new-user">
-                <input type=text id='new-username' placeholder='username'>
-                <button type='submit' id='login-button'>create account</button>
-            </form>
-        </div>
+  <nav id='welcome-bar'>
+    <img src="https://cdn3.iconfinder.com/data/icons/media-1-3/32/Internet-Globe-Communication-512.png" alt="internet icon" width = '30' height = '30'>
+    <h1 style="display: inline;">Review It All!</h1>
+
+    <div class="theme-switch-wrapper">
+      <h3 id='displayname' class='show-name'></h3>
+      
+      <label class="theme-switch" for="checkbox">
+        <input type="checkbox" id="checkbox" />
+        <div class="slider round"></div>
+      </label>
+      <em class="switch-description">Enable Dark Mode!</em>
+    </div>
+  </nav>
+
+  <div id="log-in-wrapper">
+    <div id="log-in">
+      <form id="form-signin">
+        <input type=text id='username' placeholder='username'>
+        <button type='submit' id='login-button'>log in</button>
+      </form>
+      <button id='new-user-toggle'>new user?</button>
     </div>
 
-    <div id="reviews-wrapper">
-        
+    <div id="new-user">
+      <form id="form-new-user">
+        <input type=text id='new-username' placeholder='username'>
+        <button type='submit' id='login-button'>create account</button>
+      </form>
     </div>
+  </div>
 
+  <div id="reviews-wrapper">
+  </div>
 </body>
