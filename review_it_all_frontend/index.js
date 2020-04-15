@@ -1,14 +1,16 @@
 let userID = ""
 const logInWrapper = document.getElementById('log-in-wrapper')
 const logIn = document.getElementById('form-signin')
-const logOut = document.getElementById('log-out')
+const displayName = document.getElementById('displayname')
 const newUser = document.getElementById('new-user')
 const newUserToggle = document.getElementById('new-user-toggle')
 
+const reviewsWrapper = document.getElementById('reviews-wrapper')
+
 const renderLogin = () => {
   newUser.hidden = true
-  logOut.hidden = true
   logInWrapper.hidden = false
+  displayName.hidden = true
 }
   
 const addLogInListener = () => {
@@ -69,14 +71,17 @@ const createNewUser = username => {
 
 const renderHomePage = username => {
   logInWrapper.hidden = true;
-  logOut.hidden = false;
+  displayName.hidden = false;
+  console.log(username)
+  console.log(displayName)
+  displayName.innerHTML = `${username} <button id='log-out'>log out</button>`
   addLogOutEventListener();
-  //toDo: display username on welcome bar
   //toDo: create reviews show div
   fetchReviews()
 }
 
 const addLogOutEventListener = () => {
+const logOut = document.getElementById('log-out')
   logOut.addEventListener('click', event => {
     event.preventDefault()
     logOutUser()
@@ -91,7 +96,15 @@ const logOutUser = () => { //clear current user global variables, load login
 const fetchReviews = () => {
   fetch('http://localhost:3000/reviews')
     .then(resp => resp.json())
-    .then(reviewObjs => console.log(reviewObjs))
+    .then(reviewObjs => {
+      reviewObjs.forEach(r => {
+        displayReview(r.content, r.user_id, r.subject_id)
+      })
+    })
+}
+
+const displayReview = (content, userId, subjId) => {
+  reviewsWrapper.innerHTML += '<h4></h4>'
 }
 
 function main() {
