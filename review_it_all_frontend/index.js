@@ -103,8 +103,8 @@ const fetchReviews = () => {
 const displayReview = async(content, userId, subjId) => {
   const userName = await fetchUsername(userId)
   const subject = await fetchSubject(subjId)
-  reviewsWrapper.innerHTML += `<div class='review'><h4>${subject.name}</h4><h3>${userName}</h3>
-  <p>${content}</p></div>`
+  reviewsWrapper.innerHTML += `<div class='review'><h3>${subject.name}</h3><h4>review by: ${userName}</h4>
+  <p>${content}</p><h5>category: ${subject.category}</h5></div>`
 }
 
 const fetchUsername = (userId) => {
