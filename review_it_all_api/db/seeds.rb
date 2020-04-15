@@ -43,6 +43,8 @@ subject8 = Subject.create(description: "Entertainment", category: "Technology")
 subject9 = Subject.create(description: "Entertainment", category: "Music")
 subject10 = Subject.create(description: "Lifestyle", category: "Psychology")
 
+
+# Reviews:
 review1 = Review.create(content: "Programming is not a personality trait.", subject_id: 1, user_id: 7)
 review2 = Review.create(content: "COBOL really picked up during this crisis.", subject_id: 1, user_id: 3)
 review3 = Review.create(content: "AI is just a bunch of if/else statements, don't hate the player, hate the game.", subject_id: 1, user_id: 10)
