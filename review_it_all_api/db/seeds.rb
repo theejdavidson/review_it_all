@@ -47,6 +47,8 @@ subject12 = Subject.create(description: "High-level dynamically typed language c
 subject13 = Subject.create(description: "Statically typed, compiled memory-safe language with both low and high-level uses", category: "Programming Languages", name: "Rust")
 
 
+
+# Reviews:
 review1 = Review.create(content: "Programming is not a personality trait.", subject_id: 1, user_id: 7)
 review2 = Review.create(content: "COBOL really picked up during this crisis.", subject_id: 1, user_id: 3)
 review3 = Review.create(content: "AI is just a bunch of if/else statements, don't hate the player, hate the game.", subject_id: 1, user_id: 10)
