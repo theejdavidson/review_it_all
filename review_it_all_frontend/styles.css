@@ -4,6 +4,7 @@
   --font-color: #424242;
   --bg-color: #fff;
   --heading-color: #292922;
+  --review-box-color: #e1e1ff;
 }
 
 [data-theme="dark"] {
@@ -12,6 +13,7 @@
   --font-color: #e1e1ff;
   --bg-color: #161625;
   --heading-color: #818cab;
+  --review-box-color: #424242;
 }
 
 
@@ -128,4 +130,8 @@ input:checked + .slider:before {
 
 .text-center {
   text-align: center!important;
+}
+
+.review {
+  background-color: var(--review-box-color);
 }
