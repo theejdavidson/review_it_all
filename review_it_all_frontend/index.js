@@ -1,4 +1,4 @@
-let userID = ""
+let currentUserID = ""
 const logInWrapper = document.getElementById('log-in-wrapper')
 const logIn = document.getElementById('form-signin')
 const displayName = document.getElementById('displayname')
@@ -34,7 +34,7 @@ const logInUser = username => {
     .then(users => {
       const currentUser = users.find(un => un.username == username)
       if(currentUser) {
-        userID = currentUser.id
+        currentUserID = currentUser.id
         renderHomePage(username)
       } else {
         //show error message
@@ -103,7 +103,7 @@ const addWriteReviewEventListener = () => {
 
 
 const logOutUser = () => { //clear current user global variables, load login
-  userID = ""
+  currentUserID = ""
   renderLogin()
 }
 
@@ -115,6 +115,10 @@ const fetchReviews = () => {
       displayReview(r.content, r.score, r.user_id, r.subject_id)
     })
   })
+}
+
+const filterReviewsByUserID = () => {
+  
 }
 
 const displayReview = async(content, score, userId, subjId) => {
@@ -158,8 +162,8 @@ const createSubj = async(name, category, description) => {
     })
   }
   return fetch('http://localhost:3000/subjects', reqBody)
-  .then(resp => resp.json())
-  .then(subjObj => subjObj)
+    .then(resp => resp.json())
+    .then(subjObj => subjObj)
   
 }
 
@@ -172,6 +176,8 @@ const addNewReviewFormEventListener = () => {
     const score = event.target[3].value
     const content = event.target[4].value
     postNewReview(subjName, category, desc, score, content)
+    newReviewForm.reset()
+    renderHomePage()
   })
 }
 
@@ -184,7 +190,7 @@ const postNewReview = async(subjName, category, desc, score, content) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      user_id: userID,
+      user_id: currentUserID,
       score: score,
       subject_id: subjObj['id'],
       content: content
@@ -192,9 +198,6 @@ const postNewReview = async(subjName, category, desc, score, content) => {
   }
 
   fetch('http://localhost:3000/reviews', reqBody)
-    .then(resp => resp.json())
-    .then(foo => console.log(foo))
-
 }
 
 function main() {
