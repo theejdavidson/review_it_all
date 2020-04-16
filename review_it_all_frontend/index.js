@@ -79,7 +79,7 @@ const renderHomePage = username => {
   logInWrapper.hidden = true
   displayName.hidden = false
   reviewsWrapper.hidden = false
-  writeReview.hidden = false
+  writeReviewBtn.hidden = false
   displayName.innerHTML = `${username} <button id='log-out' class="btn">log out</button>`
   addLogOutEventListener();
   fetchReviews()
