@@ -79,8 +79,8 @@ const renderHomePage = username => {
   logInWrapper.hidden = true
   displayName.hidden = false
   reviewsWrapper.hidden = false
-  writeReviewBtn.hidden = false
-  displayName.innerHTML = `${username} <button id='log-out'>log out</button>`
+  writeReview.hidden = false
+  displayName.innerHTML = `${username} <button id='log-out' class="btn">log out</button>`
   addLogOutEventListener();
   fetchReviews()
 }
@@ -125,8 +125,8 @@ const fetchReviews = () => {
 const displayReview = async(content, userId, subjId) => {
   const userName = await fetchUsername(userId)
   const subject = await fetchSubject(subjId)
-  reviewsWrapper.innerHTML += `<div class='review'><h3>${subject.name}</h3><h4>review by: ${userName}</h4>
-  <p>${content}</p><h5>category: ${subject.category}</h5></div>`
+  reviewsWrapper.innerHTML += `<div class='review'><h3 class="subject-placement">${subject.name}</h3><h4 class="name-placement">@${userName}</h4>
+  <p>${content}</p><p class="category-placement">${subject.category}</p></div>`
 }
 
 const fetchUsername = async(userId) => {
@@ -179,3 +179,21 @@ if (currentTheme) {
   }
 }
 // -------------------------------DARK/LIGHT MODE TOGGLE------------------------------->
+
+// --------------------------------SCROLL TO TOP BUTTON-------------------------------->
+mybutton = document.getElementById("myBtn");
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+function topFunction() {
+  document.documentElement.scrollTop = 0;
+}
+// --------------------------------SCROLL TO TOP BUTTON-------------------------------->
