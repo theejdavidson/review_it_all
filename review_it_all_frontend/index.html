@@ -14,7 +14,7 @@
     <img src="https://cdn3.iconfinder.com/data/icons/media-1-3/32/Internet-Globe-Communication-512.png" alt="internet icon" class="icon">
     <h1 class='app-name'>Review It All!</h1>
 
-    <button id='write-review' class='btn'>write a review</button>
+    <button id='write-review' class='btn'>review a new subject</button>
 
     <div class="theme-switch-wrapper">
       <h3 id='displayname' class='show-name'></h3>
@@ -62,9 +62,39 @@
   </div>
 
   <div id="new-review-wrapper">
-    <form id="new-review-form">
-      <input type="text" id="new-review-subject", placeholder='subject'>
-      <button type="submit" class="btn">post review</button>
+    <form id="new-review-form" class="new-review-format">
+      <ul>
+        <li>
+          <input type="text" id="new-review-subject" class="field-style field-split align-left" placeholder='Subject'>
+          <input id="subject-description" class="field-style field-split align-right" placeholder="Description">
+        </li>
+        <li>
+          <label for="category">Category: </label>
+          <select id="category">
+            <option value='Programming Languages'>Programming Languages</option>
+            <option value='Television'>Television</option>
+            <option value='Movies'>Movies</option>
+            <option value='Gaming'>Gaming</option>
+            <option value='Sports'>Sports</option>
+            <option value='Humor'>Humor</option>
+            <option value='Miscellaneous'>Miscellaneous</option>
+          </select>
+        </li>
+        <li>
+          <label for="score">Score: </label>
+          <select id="score">
+            <option value='1'>1</option>
+            <option value='2'>2</option>
+            <option value='3'>3</option>
+            <option value='4'>4</option>
+            <option value='5'>5</option>
+          </select>
+        </li>
+        <li>
+          <label for="review-content"></label><textarea id="review-content" class="field-style" placeholder="Review Content"></textarea>
+        </li>
+      </ul>
+      <button type="submit" class="btn">Post Review</button>
     </form>
   </div>
 
