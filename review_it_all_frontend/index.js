@@ -6,11 +6,13 @@ const newUser = document.getElementById('new-user')
 const newUserToggle = document.getElementById('new-user-toggle')
 const reviewsWrapper = document.getElementById('reviews-wrapper')
 const newReviewWrapper = document.getElementById('new-review-wrapper')
-const writeReview = document.getElementById('write-review')
+const newReviewForm = document.getElementById('new-review-form')
+const writeReviewBtn = document.getElementById('write-review')
+
 
 const renderLogin = () => {
   newUser.hidden = true
-  writeReview.hidden = true
+  writeReviewBtn.hidden = true
   logInWrapper.hidden = false
   displayName.hidden = true
   newReviewWrapper.hidden = true
@@ -77,7 +79,7 @@ const renderHomePage = username => {
   logInWrapper.hidden = true
   displayName.hidden = false
   reviewsWrapper.hidden = false
-  writeReview.hidden = false
+  writeReviewBtn.hidden = false
   displayName.innerHTML = `${username} <button id='log-out'>log out</button>`
   addLogOutEventListener();
   fetchReviews()
@@ -88,6 +90,20 @@ const logOut = document.getElementById('log-out')
   logOut.addEventListener('click', event => {
     event.preventDefault()
     logOutUser()
+  })
+}
+
+const addWriteReviewEventListener = () => {
+  writeReviewBtn.addEventListener('click', event => {
+    event.preventDefault()
+    newReviewWrapper.hidden = false
+    reviewsWrapper.hidden = true
+  })
+}
+
+const addNewReviewFormEventListener = () => {
+  newReviewForm.addEventListener('submit', event => {
+    event.preventDefault()
   })
 }
 
@@ -129,6 +145,8 @@ function main() {
   renderLogin()
   addLogInListener()
   addNewUserEventListener()
+  addWriteReviewEventListener()
+  addNewReviewFormEventListener()
 }
 
 main();
