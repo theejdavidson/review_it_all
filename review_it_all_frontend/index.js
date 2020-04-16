@@ -117,16 +117,24 @@ const fetchReviews = () => {
     .then(resp => resp.json())
     .then(reviewObjs => {
       reviewObjs.forEach(r => {
-        displayReview(r.content, r.user_id, r.subject_id)
+        displayReview(r.content, r.score, r.user_id, r.subject_id)
       })
     })
 }
 
-const displayReview = async(content, userId, subjId) => {
+const displayReview = async(content, score, userId, subjId) => {
   const userName = await fetchUsername(userId)
   const subject = await fetchSubject(subjId)
   reviewsWrapper.innerHTML += `<div class='review'><h3 class="subject-placement">${subject.name}</h3><h4 class="name-placement">@${userName}</h4>
-  <p>${content}</p><p class="category-placement">${subject.category}</p></div>`
+  <p>${content}</p><p>${renderScore(score)}</p><p class="category-placement">${subject.category}</p></div>`
+}
+
+const renderScore = score => {
+  let rendered = '★'.repeat(score)
+  while (rendered.length < 5) {
+      rendered += '☆'
+    }
+  return rendered
 }
 
 const fetchUsername = async(userId) => {
