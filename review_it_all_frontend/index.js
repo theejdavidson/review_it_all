@@ -1,4 +1,5 @@
 let currentUserID = ""
+let currentUserName = ""
 const logInWrapper = document.getElementById('log-in-wrapper')
 const logIn = document.getElementById('form-signin')
 const displayName = document.getElementById('displayname')
@@ -40,6 +41,7 @@ const logInUser = username => {
       const currentUser = users.find(un => un.username == username)
       if(currentUser) {
         currentUserID = currentUser.id
+        currentUserName = username
         renderHomePage(username)
       } else {
         //show error message
@@ -191,7 +193,7 @@ const addNewReviewFormEventListener = () => {
     const content = event.target[4].value
     postNewReview(subjName, category, desc, score, content)
     newReviewForm.reset()
-    renderHomePage()
+    renderHomePage(currentUserName)
   })
 }
 
@@ -219,7 +221,7 @@ const addAllReviewsButtonListener = () => {
     event.preventDefault()
     newReviewWrapper.hidden = true
     reviewsWrapper.innerHTML = ``
-    renderHomePage()
+    renderHomePage(currentUserName)
   })
 }
 
