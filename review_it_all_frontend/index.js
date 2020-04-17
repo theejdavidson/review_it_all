@@ -45,7 +45,7 @@ const logInUser = username => {
         renderHomePage(username)
       } else {
         //show error message
-        console.log('username does not exist')
+        document.getElementById('username').value = 'invalid username!'
       }
     })
 }
@@ -111,6 +111,7 @@ const addWriteReviewEventListener = () => {
 
 const logOutUser = () => { //clear current user global variables, load login
   currentUserID = ""
+  currentUserName = ""
   renderLogin()
 }
 
@@ -130,7 +131,7 @@ const filterReviewsByUserID = async(userID) => {
     .then(resp => resp.json())
     .then(obj => {
       obj['reviews'].forEach(r => {
-      displayReview(r.content, r.score, r.user_id, r.subject_id, r.id)
+      displayReview(r.content, r.score, r.user_id, r.subject_id, r.id, r['votes'])
     })
   })
 }
@@ -141,35 +142,38 @@ const tallyVotes = (votesArr) => {
     downvotes: 0,
     total: 0
   }
-  votesArr.forEach(voteObj => {
-    if (voteObj['sentiment'] == 1) {
-      voteTally.upvotes += 1
-    } else {
-      voteTally.downvotes -= 1
-    }
-    voteTally.total = voteTally.upvotes + voteTally.downvotes
-  })
-  console.log(voteTally)
+  if (votesArr) {
+    votesArr.forEach(voteObj => {
+      if (voteObj['sentiment'] == 1) {
+        voteTally.upvotes += 1
+      } else {
+        voteTally.downvotes -= 1
+      }
+      voteTally.total = voteTally.upvotes + voteTally.downvotes
+    })
+  }
+  return voteTally
 }
 
 const displayReview = async(content, score, userId, subjId, reviewId, votesArr) => {
   const userName = await fetchUsername(userId)
   const subject = await fetchSubject(subjId)
 
-  tallyVotes(votesArr)
+  const voteTally = tallyVotes(votesArr)
+  const tallyWrapper = `<div class='tally-wrapper' id='tally-${reviewId}'>${voteTally.upvotes}<button>👍</button>${voteTally.total}<button>👎</button>${voteTally.downvotes}</div>`
 
   let deleteBtn = ''
   if (userId == currentUserID) {
     deleteBtn = `<button class='btn' onclick='deleteReview(${reviewId})'>delete review</button>`
   }
 
-  reviewsWrapper.innerHTML += `<div class='review' id='${reviewId}'><h3 class="subject-placement">${subject.name}</h3><h4 class="name-placement">@${userName}</h4>
-  <p>${content}</p><p>${renderScore(score)}</p><p class="category-placement">${subject.category}</p>${deleteBtn}</div>`
+  reviewsWrapper.innerHTML += `<div class='review' id='review-${reviewId}'><h3 class="subject-placement">${subject.name}</h3><h4 class="name-placement">@${userName}</h4>
+  <p>${content}</p><p>${renderScore(score)}</p><p class="category-placement">${subject.category}</p>${tallyWrapper}${deleteBtn}</div>`
   //<button class='btn' data-subj-id='${subjId}'>review this subject</button>
 }
 
 const deleteReview = (reviewId) => {
-  document.getElementById(reviewId).remove()
+  document.getElementById(`review-${reviewId}`).remove()
   reqObj = {
     method: 'DELETE',
   }
