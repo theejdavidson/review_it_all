@@ -8,15 +8,18 @@ const reviewsWrapper = document.getElementById('reviews-wrapper')
 const newReviewWrapper = document.getElementById('new-review-wrapper')
 const newReviewForm = document.getElementById('new-review-form')
 const writeReviewBtn = document.getElementById('write-review')
+const allReviewsBtn = document.getElementById('all-reviews')
 
 
 const renderLogin = () => {
   newUser.hidden = true
   writeReviewBtn.hidden = true
+  allReviewsBtn.hidden = true
   logInWrapper.hidden = false
   displayName.hidden = true
   newReviewWrapper.hidden = true
   reviewsWrapper.hidden = true
+
 }
   
 const addLogInListener = () => {
@@ -80,7 +83,8 @@ const renderHomePage = username => {
   displayName.hidden = false
   reviewsWrapper.hidden = false
   writeReviewBtn.hidden = false
-  displayName.innerHTML = `${username} <button id='log-out' class="btn">log out</button>`
+  allReviewsBtn.hidden = false
+  displayName.innerHTML = `<button id='my-reviews' class='btn'>my reviews</button> ${username} <button id='log-out' class="btn">log out</button>`
   addLogOutEventListener();
   fetchReviews()
 }

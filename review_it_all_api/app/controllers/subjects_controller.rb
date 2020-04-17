@@ -10,4 +10,18 @@ class SubjectsController < ApplicationController
         render json: subject
     end
 
+    def create
+        p params
+        subject = Subject.new(subject_params)
+        if subject.save
+            render json: subject
+        end
+    end
+
+    private
+    
+    def subject_params
+        params.require(:subject).permit(:description, :category, :name)
+    end
+
 end

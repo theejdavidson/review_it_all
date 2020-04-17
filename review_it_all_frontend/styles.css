@@ -5,6 +5,8 @@
   --bg-color: #fff;
   --heading-color: #292922;
   --review-box-color: #e1e1ff;
+  --review-form-color: #ddddff;
+  --review-form-border-color: #abaaf1;
 }
 
 [data-theme="dark"] {
@@ -14,6 +16,8 @@
   --bg-color: #161625;
   --heading-color: #818cab;
   --review-box-color: #424242;
+  --review-form-color: #14141f;
+  --review-form-border-color: #414141;
 }
 
 
@@ -220,12 +224,12 @@ input:checked + .slider:before {
 /* ------------------ NEW REVIEW FORM ------------------ */
 .new-review-format {
 	max-width: 450px;
-	background: #14141f;
+	background: var(--review-form-color);
 	padding: 30px;
 	margin: 50px auto;
 	box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
 	border-radius: 10px;
-	border: 6px solid rgb(65, 65, 65);
+	border: 6px solid var(--review-form-border-color);
 }
 
 .new-review-format ul {
