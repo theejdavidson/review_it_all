@@ -9,12 +9,14 @@ const newReviewWrapper = document.getElementById('new-review-wrapper')
 const newReviewForm = document.getElementById('new-review-form')
 const writeReviewBtn = document.getElementById('write-review')
 const allReviewsBtn = document.getElementById('all-reviews')
+const myReviewsBtn = document.getElementById('my-reviews')
 
 
 const renderLogin = () => {
   newUser.hidden = true
   writeReviewBtn.hidden = true
   allReviewsBtn.hidden = true
+  myReviewsBtn.hidden = true
   logInWrapper.hidden = false
   displayName.hidden = true
   newReviewWrapper.hidden = true
@@ -84,7 +86,8 @@ const renderHomePage = username => {
   reviewsWrapper.hidden = false
   writeReviewBtn.hidden = false
   allReviewsBtn.hidden = false
-  displayName.innerHTML = `<button id='my-reviews' class='btn'>my reviews</button> ${username} <button id='log-out' class="btn">log out</button>`
+  myReviewsBtn.hidden = false
+  displayName.innerHTML = `${username} <button id='log-out' class="btn">log out</button>`
   addLogOutEventListener();
   fetchReviews()
 }
@@ -122,7 +125,8 @@ const fetchReviews = () => {
 }
 
 const filterReviewsByUserID = async(userID) => {
-  return fetch(`http://localhost:3000/users/${userID}`)
+  reviewsWrapper.innerHTML = ``
+  fetch(`http://localhost:3000/users/${userID}`)
     .then(resp => resp.json())
     .then(obj => {
       obj['reviews'].forEach(r => {
@@ -210,12 +214,31 @@ const postNewReview = async(subjName, category, desc, score, content) => {
   fetch('http://localhost:3000/reviews', reqBody)
 }
 
+const addAllReviewsButtonListener = () => {
+  allReviewsBtn.addEventListener('click', event => {
+    event.preventDefault()
+    newReviewWrapper.hidden = true
+    reviewsWrapper.innerHTML = ``
+    renderHomePage()
+  })
+}
+
+const addMyReviewsButtonListener = () => {
+  myReviewsBtn.addEventListener('click', event => {
+    event.preventDefault()
+    newReviewWrapper.hidden = true
+    filterReviewsByUserID(currentUserID)
+  })
+}
+
 function main() {
   renderLogin()
   addLogInListener()
   addNewUserEventListener()
   addWriteReviewEventListener()
   addNewReviewFormEventListener()
+  addAllReviewsButtonListener()
+  addMyReviewsButtonListener()
 }
 
 main();
