@@ -78,8 +78,6 @@ const createNewUser = username => {
     })
   }
   fetch(`http://localhost:3000/users`, reqBody)
-    .then(resp => resp.json())
-    .then(json => console.log(json))
 }
 
 const renderHomePage = username => {
@@ -121,7 +119,7 @@ const fetchReviews = () => {
   .then(resp => resp.json())
   .then(reviewObjs => {
     reviewObjs.forEach(r => {
-      displayReview(r.content, r.score, r.user_id, r.subject_id, r.id)
+      displayReview(r.content, r.score, r.user_id, r.subject_id, r.id, r['votes'])
     })
   })
 }
@@ -137,9 +135,28 @@ const filterReviewsByUserID = async(userID) => {
   })
 }
 
-const displayReview = async(content, score, userId, subjId, reviewId) => {
+const tallyVotes = (votesArr) => {
+  const voteTally = {
+    upvotes: 0,
+    downvotes: 0,
+    total: 0
+  }
+  votesArr.forEach(voteObj => {
+    if (voteObj['sentiment'] == 1) {
+      voteTally.upvotes += 1
+    } else {
+      voteTally.downvotes -= 1
+    }
+    voteTally.total = voteTally.upvotes + voteTally.downvotes
+  })
+  console.log(voteTally)
+}
+
+const displayReview = async(content, score, userId, subjId, reviewId, votesArr) => {
   const userName = await fetchUsername(userId)
   const subject = await fetchSubject(subjId)
+
+  tallyVotes(votesArr)
 
   let deleteBtn = ''
   if (userId == currentUserID) {
