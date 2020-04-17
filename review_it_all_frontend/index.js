@@ -121,7 +121,7 @@ const fetchReviews = () => {
   .then(resp => resp.json())
   .then(reviewObjs => {
     reviewObjs.forEach(r => {
-      displayReview(r.content, r.score, r.user_id, r.subject_id)
+      displayReview(r.content, r.score, r.user_id, r.subject_id, r.id)
     })
   })
 }
@@ -132,16 +132,32 @@ const filterReviewsByUserID = async(userID) => {
     .then(resp => resp.json())
     .then(obj => {
       obj['reviews'].forEach(r => {
-      displayReview(r.content, r.score, r.user_id, r.subject_id)
+      displayReview(r.content, r.score, r.user_id, r.subject_id, r.id)
     })
   })
 }
 
-const displayReview = async(content, score, userId, subjId) => {
+const displayReview = async(content, score, userId, subjId, reviewId) => {
   const userName = await fetchUsername(userId)
   const subject = await fetchSubject(subjId)
-  reviewsWrapper.innerHTML += `<div class='review'><h3 class="subject-placement">${subject.name}</h3><h4 class="name-placement">@${userName}</h4>
-  <p>${content}</p><p>${renderScore(score)}</p><p class="category-placement">${subject.category}</p><button class='btn' data-subj-id='${subjId}'>review this subject</button></div>`
+
+  let deleteBtn = ''
+  if (userId == currentUserID) {
+    deleteBtn = `<button class='btn' onclick='deleteReview(${reviewId})'>delete review</button>`
+  }
+
+  reviewsWrapper.innerHTML += `<div class='review' id='${reviewId}'><h3 class="subject-placement">${subject.name}</h3><h4 class="name-placement">@${userName}</h4>
+  <p>${content}</p><p>${renderScore(score)}</p><p class="category-placement">${subject.category}</p>${deleteBtn}</div>`
+  //<button class='btn' data-subj-id='${subjId}'>review this subject</button>
+}
+
+const deleteReview = (reviewId) => {
+  document.getElementById(reviewId).remove()
+  // reqObj = {
+  //   method: 'DELETE',
+  // }
+
+  // fetch(`http://localhost:3000/reviews/${reviewId}`, reqObj)
 }
 
 const renderScore = score => {
