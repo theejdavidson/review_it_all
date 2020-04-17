@@ -219,6 +219,22 @@ input:checked + .slider:before {
   left: 0.5em;
   margin-right: -50%;
 }
+
+.tally-wrapper {
+  display: flex;
+  justify-content: left;
+  bottom: 15px;
+}
+
+.tally-wrapper div {
+  margin: 3px;
+}
+
+.delete-review-btn {
+  position: absolute;
+  bottom: 15px;
+  right: 30px;
+}
 /* ------------------ REVIEWS ------------------ */
 
 /* ------------------ NEW REVIEW FORM ------------------ */

@@ -160,15 +160,15 @@ const displayReview = async(content, score, userId, subjId, reviewId, votesArr) 
   const subject = await fetchSubject(subjId)
 
   const voteTally = tallyVotes(votesArr)
-  const tallyWrapper = `<div class='tally-wrapper' id='tally-${reviewId}'>${voteTally.upvotes}<button>👍</button>${voteTally.total}<button>👎</button>${voteTally.downvotes}</div>`
+  const tallyWrapper = `<div class='tally-wrapper' id='tally-${reviewId}'><div><button>${voteTally.upvotes} 👍</button></div><div>${voteTally.total}</div><div><button>👎 ${voteTally.total}</button></div></div>`
 
   let deleteBtn = ''
   if (userId == currentUserID) {
-    deleteBtn = `<button class='btn' onclick='deleteReview(${reviewId})'>delete review</button>`
+    deleteBtn = `<button class='delete-review-btn btn' onclick='deleteReview(${reviewId})'>delete review</button>`
   }
 
   reviewsWrapper.innerHTML += `<div class='review' id='review-${reviewId}'><h3 class="subject-placement">${subject.name}</h3><h4 class="name-placement">@${userName}</h4>
-  <p>${content}</p><p>${renderScore(score)}</p><p class="category-placement">${subject.category}</p>${tallyWrapper}${deleteBtn}</div>`
+  <p>${renderScore(score)}</p><p>${content}</p><p class="category-placement">${subject.category}</p>${tallyWrapper}${deleteBtn}</div>`
   //<button class='btn' data-subj-id='${subjId}'>review this subject</button>
 }
 
