@@ -155,12 +155,27 @@ const tallyVotes = (votesArr) => {
   return voteTally
 }
 
+const checkIfUserVoted = (votesArr) => {
+  let voted = false
+  votesArr.forEach(voteObj => {
+    if(voteObj['user_id'] == currentUserID) {
+      voted = voteObj['id']
+    }
+  })
+  return voted
+}
+
 const displayReview = async(content, score, userId, subjId, reviewId, votesArr) => {
   const userName = await fetchUsername(userId)
   const subject = await fetchSubject(subjId)
+  let userHasVoted = false
 
   const voteTally = tallyVotes(votesArr)
-  const tallyWrapper = `<div class='tally-wrapper' id='tally-${reviewId}'>${voteTally.upvotes}<button>👍</button>${voteTally.total}<button>👎</button>${voteTally.downvotes}</div>`
+  if (votesArr) {
+    userHasVotedId = checkIfUserVoted(votesArr)
+  }
+
+  const tallyWrapper = `<div class='tally-wrapper' id='tally-${reviewId}'>${voteTally.upvotes}<button onclick='castVote(1, ${userHasVotedId}, ${reviewId})'>👍</button>${voteTally.total}<button onclick'castVote(-1, ${userHasVotedId}, ${reviewId})'>👎</button>${voteTally.downvotes}</div>`
 
   let deleteBtn = ''
   if (userId == currentUserID) {
@@ -170,6 +185,45 @@ const displayReview = async(content, score, userId, subjId, reviewId, votesArr) 
   reviewsWrapper.innerHTML += `<div class='review' id='review-${reviewId}'><h3 class="subject-placement">${subject.name}</h3><h4 class="name-placement">@${userName}</h4>
   <p>${content}</p><p>${renderScore(score)}</p><p class="category-placement">${subject.category}</p>${tallyWrapper}${deleteBtn}</div>`
   //<button class='btn' data-subj-id='${subjId}'>review this subject</button>
+}
+
+const castVote = (sentiment, userHasVotedId, reviewId) => {
+
+  if (userHasVotedId) {
+    updateVote(sentiment, userHasVotedId)
+  } else {
+    reqBody = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        review_id: reviewId,
+        user_id: currentUserID,
+        sentiment: sentiment
+      })
+    }
+    fetch('http://localhost:3000/votes', reqBody)
+      .then(resp => resp.json())
+      .then(foo => console.log(foo))
+  }
+}
+
+const updateVote = (sentiment, voteId) => {
+  reqBody = {
+    method: 'PATCH',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      sentiment: sentiment
+    })
+  }
+  fetch(`http://localhost:3000/votes/${voteId}`, reqBody)
+    .then(resp => resp.json())
+    .then(foo => console.log(foo))
 }
 
 const deleteReview = (reviewId) => {
