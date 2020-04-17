@@ -5,6 +5,8 @@
   --bg-color: #fff;
   --heading-color: #292922;
   --review-box-color: #e1e1ff;
+  --review-form-color: #ddddff;
+  --review-form-border-color: #abaaf1;
 }
 
 [data-theme="dark"] {
@@ -14,6 +16,8 @@
   --bg-color: #161625;
   --heading-color: #818cab;
   --review-box-color: #424242;
+  --review-form-color: #14141f;
+  --review-form-border-color: #414141;
 }
 
 
@@ -216,3 +220,58 @@ input:checked + .slider:before {
   margin-right: -50%;
 }
 /* ------------------ REVIEWS ------------------ */
+
+/* ------------------ NEW REVIEW FORM ------------------ */
+.new-review-format {
+	max-width: 450px;
+	background: var(--review-form-color);
+	padding: 30px;
+	margin: 50px auto;
+	box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+	border-radius: 10px;
+	border: 6px solid var(--review-form-border-color);
+}
+
+.new-review-format ul {
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+
+.new-review-format ul li{
+	display: block;
+	margin-bottom: 10px;
+	min-height: 35px;
+}
+
+.new-review-format ul li  .field-style{
+	box-sizing: border-box; 
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box; 
+	padding: 8px;
+	outline: none;
+	border: 1px solid #B0CFE0;
+}
+
+.new-review-format ul li .field-style:focus{
+	box-shadow: 0 0 5px #B0CFE0;
+	border:1px solid #B0CFE0;
+}
+
+.new-review-format ul li .field-split{
+	width: 49%;
+}
+
+.new-review-format ul li input.align-left{
+	float:left;
+}
+
+.new-review-format ul li input.align-right{
+	float:right;
+}
+
+.new-review-format ul li textarea{
+	width: 100%;
+	height: 100px;
+}
+/* ------------------ NEW REVIEW FORM ------------------ */

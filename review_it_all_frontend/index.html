@@ -15,6 +15,7 @@
     <h1 class='app-name'>Review It All!</h1>
 
     <button id='write-review' class='btn'>review a new subject</button>
+    <button id='all-reviews' class='btn'>see all reviews</button>
 
     <div class="theme-switch-wrapper">
       <h3 id='displayname' class='show-name'></h3>
@@ -62,32 +63,39 @@
   </div>
 
   <div id="new-review-wrapper">
-    <form id="new-review-form">
-      <label for="subject">Subject: </label>
-      <input type="text" id="new-review-subject", placeholder='subject'><br>
-      <label for="subject-description">Subject description:</label>
-      <textarea id="subject-description"></textarea><br>
-      <label for="category">Category: </label>
-      <select id="category">
-        <option value='Programming Languages'>Programming Languages</option>
-        <option value='Television'>Television</option>
-        <option value='Movies'>Movies</option>
-        <option value='Gaming'>Gaming</option>
-        <option value='Sports'>Sports</option>
-        <option value='Humor'>Humor</option>
-        <option value='Miscellaneous'>Miscellaneous</option>
-      </select><br>
-      <label for="score">Score: </label>
-      <select id="score">
-        <option value='1'>1</option>
-        <option value='2'>2</option>
-        <option value='3'>3</option>
-        <option value='4'>4</option>
-        <option value='5'>5</option>
-      </select><br>
-      <label for="review-content">Review content:</label>
-      <textarea id="review-content"></textarea><br>
-      <button type="submit" class="btn">post review</button>
+    <form id="new-review-form" class="new-review-format">
+      <ul>
+        <li>
+          <input type="text" id="new-review-subject" class="field-style field-split align-left" placeholder='Subject'>
+          <input id="subject-description" class="field-style field-split align-right" placeholder="Description">
+        </li>
+        <li>
+          <label for="category">Category: </label>
+          <select id="category">
+            <option value='Programming Languages'>Programming Languages</option>
+            <option value='Television'>Television</option>
+            <option value='Movies'>Movies</option>
+            <option value='Gaming'>Gaming</option>
+            <option value='Sports'>Sports</option>
+            <option value='Humor'>Humor</option>
+            <option value='Miscellaneous'>Miscellaneous</option>
+          </select>
+        </li>
+        <li>
+          <label for="score">Score: </label>
+          <select id="score">
+            <option value='1'>1</option>
+            <option value='2'>2</option>
+            <option value='3'>3</option>
+            <option value='4'>4</option>
+            <option value='5'>5</option>
+          </select>
+        </li>
+        <li>
+          <label for="review-content"></label><textarea id="review-content" class="field-style" placeholder="Review Content"></textarea>
+        </li>
+      </ul>
+      <button type="submit" class="btn">Post Review</button>
     </form>
   </div>
 
