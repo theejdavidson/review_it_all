@@ -10,7 +10,7 @@ class UsersController < ApplicationController
         else
             user = User.find(params[:id])
         end
-        render json: user
+        render json: user, include: [:reviews]
     end
 
     def create

@@ -117,8 +117,14 @@ const fetchReviews = () => {
   })
 }
 
-const filterReviewsByUserID = () => {
-  
+const filterReviewsByUserID = async(userID) => {
+  return fetch(`http://localhost:3000/users/${userID}`)
+    .then(resp => resp.json())
+    .then(obj => {
+      obj['reviews'].forEach(r => {
+      displayReview(r.content, r.score, r.user_id, r.subject_id)
+    })
+  })
 }
 
 const displayReview = async(content, score, userId, subjId) => {
