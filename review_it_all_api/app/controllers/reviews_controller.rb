@@ -6,11 +6,15 @@ class ReviewsController < ApplicationController
     end
 
     def create
-        p params
         review = Review.new(review_params)
         if review.save
             render json: review
         end
+    end
+
+    def destroy
+        review = Review.find(params[:id])
+        review.destroy
     end
 
     private

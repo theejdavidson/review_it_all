@@ -153,11 +153,11 @@ const displayReview = async(content, score, userId, subjId, reviewId) => {
 
 const deleteReview = (reviewId) => {
   document.getElementById(reviewId).remove()
-  // reqObj = {
-  //   method: 'DELETE',
-  // }
+  reqObj = {
+    method: 'DELETE',
+  }
 
-  // fetch(`http://localhost:3000/reviews/${reviewId}`, reqObj)
+  fetch(`http://localhost:3000/reviews/${reviewId}`, reqObj)
 }
 
 const renderScore = score => {
