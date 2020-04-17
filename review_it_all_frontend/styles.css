@@ -234,6 +234,7 @@ input:checked + .slider:before {
   position: absolute;
   bottom: 15px;
   right: 30px;
+  background-color: #3d3d3d;
 }
 /* ------------------ REVIEWS ------------------ */
 
