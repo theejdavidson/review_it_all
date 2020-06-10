@@ -4,6 +4,17 @@
 </div>
 <br/>
 
+# [Demo]()
+
+## Features 
+- Sign in/Sign up option with authenticated password
+- View/Edit profile 
+- Full CRUD capabilities for post such as 
+  - Create a post
+  - View all posts written on this application
+  - Edit/Delete only the posts written by the logged in user 
+- Upvote/Downvote only the posts written by other users
+
 ## Project FAQ
 #### 1. What is Review It All?
 A reddit-like platform in which users may review whatever they have the sudden urge to review. 
