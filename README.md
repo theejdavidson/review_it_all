@@ -2,6 +2,9 @@
 <div align="center">
   You've found the center of the internet!
 </div>
+<br>
+
+Review whatever your heart desires, share your hidden thoughts with the world! With Review It All! you'll be able to see how well your thoughts hold in society. Grow in a thoughtful and civilized community.
 
 # [Demo](https://drive.google.com/file/d/1kScncqhM5h2uzm-Wo6LVW9xt75BeHQKo/view?usp=sharing)
 ![Demo](https://github.com/theejdavidson/review_it_all/blob/master/Demo.gif?raw=true)
